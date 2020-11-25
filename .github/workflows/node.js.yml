@@ -19,15 +19,38 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: 拉分支
-      uses: actions/checkout@v2
-    - run: npm install yarn -g
-    - run: yarn
-    - run: npm run build --if-present
-    - name: 输出制品
+    - name: 配置Git免密 # StrictHostKeyChecking 首次验证不用输yes
       run: |
-        cd dist
-        ls -al
-        
-        
-
+        mkdir -p ~/.ssh
+        echo "${{ secrets.CI_SECRET_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        echo "Host *" > ~/.ssh/config
+        echo "     StrictHostKeyChecking no" >> ~/.ssh/config
+        chmod 644 ~/.ssh/config
+        git config --global user.name TMaize
+        git config --global user.email 1772314831@qq.com
+    - name: 打包&部署
+      run: |
+        git clone git@github.com:TMaize/vue-admin-templet.git vue-admin-templet
+        cd vue-admin-templet
+        npm install yarn -g
+        yarn
+        npm run build --if-present
+        echo '///////////////////'
+        mv dist ..
+        git checkout --no-track -b gh-pages remotes/origin/gh-pages
+        rm -rf ./*
+        rm -rf .github .browserslistrc .editorconfig .eslintrc.js
+        cp -r  ../dist/* .
+        git add .
+        git commit -m "update pages"
+        git push --force --progress "origin" gh-pages
+    # - name: 部署gh-pages分支
+    #   uses: JamesIves/github-pages-deploy-action@3.7.1
+    #   with:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     BRANCH: gh-pages
+    #     FOLDER: build
+    #     CLEAN: true
+    - name: 发送通知
+      run: curl "${{ secrets.CI_WEBHOOOK_URL }}" -X POST

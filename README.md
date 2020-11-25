@@ -1,5 +1,8 @@
 # vue-admin-templet
 
+
+[https://tmaize.github.io/vue-admin-templet/](https://tmaize.github.io/vue-admin-templet/)
+
 view 与 route 一一对应，负责组件拼装，事件处理
 
 框架组件不做太多的逻辑处理，通过`this.$emit('action', name, data)`发送到 view 层中,因为参数不固定，中间层可以通过 arguments 再次向上传递
