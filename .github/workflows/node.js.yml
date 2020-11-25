@@ -38,7 +38,7 @@ jobs:
         npm run build --if-present
         echo '///////////////////'
         mv dist ..
-        git checkout --no-track -b gh-pages remotes/origin/gh-pages
+        git checkout --orphan gh-pages
         rm -rf ./*
         rm -rf .github .browserslistrc .editorconfig .eslintrc.js
         cp -r  ../dist/* .
