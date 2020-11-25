@@ -13,6 +13,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    redirect: '/dashboard',
     meta: { title: '主页', icon: 'el-icon-house', menu: true },
     component: () => import('../views/index.vue'),
     children: [

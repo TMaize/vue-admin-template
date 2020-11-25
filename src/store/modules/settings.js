@@ -1,10 +1,10 @@
 const state = {
-  menuHide: false
+  menuIsShow: true
 }
 
 const mutations = {
-  TOGGLE_MENU: (state) => {
-    state.menuHide = !state.menuHide
+  MENU_SHOW: (state, value) => {
+    state.menuIsShow = value
   }
 }
 

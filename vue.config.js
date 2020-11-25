@@ -40,7 +40,10 @@ class MyHtmlwebpackPluginExt {
       })
       // 强迫症的最爱
       compilation.hooks.htmlWebpackPluginAfterHtmlProcessing.tap(ID, data => {
-        data.html = prettier.format(data.html, { parser: 'html', printWidth: 999 })
+        data.html = prettier.format(data.html, {
+          parser: 'html',
+          printWidth: 999
+        })
       })
     })
   }
@@ -55,7 +58,7 @@ module.exports = {
   },
   configureWebpack: {
     externals: externals,
-    plugins: [new MyHtmlwebpackPluginExt()]
+    plugins: isProduction ? [new MyHtmlwebpackPluginExt()] : []
   },
   chainWebpack (config) {
     // 打包后标签不加 prefetch preload

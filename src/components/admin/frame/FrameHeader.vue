@@ -1,8 +1,8 @@
 <template>
-  <div class="header">
+  <div class="header" :class="{ 'menu-is-show': menuIsShow }">
     <div class="left">
       <div class="icon-btn" @click="sendAction('toggle-menu')">
-        <i :class="menuHide ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
+        <i :class="menuIsShow ? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
       </div>
       <div class="icon-btn" @click="sendAction('fresh-route')">
         <i class="el-icon-refresh-right"></i>
@@ -26,8 +26,8 @@ export default {
     }
   },
   computed: {
-    menuHide () {
-      return this.$store.state.settings.menuHide
+    menuIsShow () {
+      return this.$store.state.settings.menuIsShow
     }
   }
 }
@@ -38,7 +38,7 @@ export default {
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 220px;
+  left: 0;
   right: 0;
   height: 50px;
   background-color: #ffffff;
@@ -46,7 +46,7 @@ export default {
   user-select: none;
   display: flex;
   justify-content: space-between;
-
+  transition: left 600ms;
   > .left {
     height: 100%;
     width: 50%;
@@ -78,6 +78,11 @@ export default {
     > * {
       flex-shrink: 0;
     }
+  }
+}
+@media screen and (min-width: 768px) {
+  .header.menu-is-show {
+    left: 220px;
   }
 }
 </style>
