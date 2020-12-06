@@ -1,7 +1,7 @@
-# vue-admin-templet
+# vue-admin-template
 
 
-[https://tmaize.github.io/vue-admin-templet/](https://tmaize.github.io/vue-admin-templet/)
+[https://tmaize.github.io/vue-admin-template/](https://tmaize.github.io/vue-admin-template/)
 
 view 与 route 一一对应，负责组件拼装，事件处理
 

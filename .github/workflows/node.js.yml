@@ -31,16 +31,15 @@ jobs:
         git config --global user.email 1772314831@qq.com
     - name: 打包&部署
       run: |
-        git clone git@github.com:TMaize/vue-admin-templet.git vue-admin-templet
-        cd vue-admin-templet
-        npm install yarn -g
-        yarn
+        git clone git@github.com:TMaize/vue-admin-template.git vue-admin-template
+        cd vue-admin-template
+        npm install
         npm run build --if-present
         echo '///////////////////'
         mv dist ..
         git checkout --orphan gh-pages
         rm -rf ./*
-        rm -rf .github .browserslistrc .editorconfig .eslintrc.js
+        rm -rf .github .browserslistrc .editorconfig .eslintrc.js .gitignore
         cp -r  ../dist/* .
         git add .
         git commit -m "update pages"
