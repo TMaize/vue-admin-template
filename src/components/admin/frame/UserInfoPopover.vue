@@ -2,7 +2,7 @@
   <el-popover placement="bottom-end" trigger="click" v-model="visible">
     <template slot="reference">
       <div class="summary">
-        <span class="nickname">{{ username }}</span>
+        <el-avatar :src="headImage" fit="cover" class="headimg"/>
         <i class="el-icon-caret-bottom"></i>
       </div>
     </template>
@@ -59,13 +59,19 @@ export default {
   height: 50px;
   padding-right: 18px;
 }
-.summary .nickname {
-  margin-right: 8px;
+.summary .headimg {
+  border-radius: 50%;
+  border: 1px solid rgb(242, 242, 242);
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
 }
 .user-info {
   display: flex;
   align-items: center;
   padding-bottom: 10px;
+  user-select: none;
 }
 .user-info .el-avatar {
   flex-shrink: 0;

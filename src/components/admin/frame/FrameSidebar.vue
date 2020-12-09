@@ -31,8 +31,8 @@ export default {
   },
   computed: {
     routes () {
-      console.log(this.$router.options.routes)
-      return this.$router.options.routes
+      const routes = this.$router.options.routes
+      return routes.filter(item => item.meta && item.meta.menu === true)
     },
     menuIsShow () {
       return this.$store.state.settings.menuIsShow
@@ -40,7 +40,10 @@ export default {
   },
   methods: {
     handleSelect (key, keyPath) {
-      console.log(key)
+      if (this.$route.path === key) {
+        return
+      }
+      this.$router.push({ path: key })
     },
     closeMenu () {
       this.$store.commit('settings/MENU_SHOW', false)
